@@ -1,0 +1,87 @@
+.modal-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  max-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.modal-body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+  position: relative;
+  width: 50%;
+  height: 450px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  transition: 0.5s;
+}
+.close-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 18px;
+}
+.modal-heading {
+  margin-right: 12px;
+  margin-left: 12px;
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-align: center;
+}
+.modal-body input {
+  width: 80%;
+  height: 44px;
+  border-radius: 5px;
+  padding: 12px;
+  font-size: 18px;
+  border: 1px solid grey;
+  transition: 0.5s;
+}
+.modal-body input::placeholder {
+  font-size: 18px;
+}
+.modal-body input:focus {
+  outline: none;
+  border: 1px solid rgb(96, 181, 255);
+}
+.modal-body textarea {
+  width: 80%;
+  height: 67%;
+  padding: 12px;
+  font-size: 18px;
+  border: 1px solid grey;
+  transition: 0s;
+  border-radius: 5px;
+}
+.modal-body textarea:focus {
+  outline: none;
+  border: 1px solid rgb(96, 181, 255);
+}
+.modal-body textarea::placeholder {
+  font-size: 18px;
+}
+.modal-body button {
+  width: 180px;
+  height: 54px;
+  background-color: #0072b1;
+  border-radius: 5px;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+}
+@media only screen and (max-width: 740px) {
+  .modal-body {
+    width: 90%;
+  }
+}
