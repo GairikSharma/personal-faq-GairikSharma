@@ -11,24 +11,38 @@ import Modal from "../components/modal/Modal";
 import { BsFillChatDotsFill } from "react-icons/bs";
 
 const FAQ = () => {
+  const [userdata, setUserData] = useState([{}]);
   const [showQuestionModal, setShowQuestionModal] = useState(false);
-
-  useEffect(()=>{
+  // const fetchQA = async () => {
+  //   try {
+  //     const data = await fetch(
+  //       `${process.env.REACT_APP_BASE_URL}read/livetocode`
+  //     );
+  //     const res = await data.json();
+  //     setUserData(res.data);
+  //     console.log(userdata);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  useEffect(() => {
     axios(`${process.env.REACT_APP_BASE_URL}read/livetocode`)
-    .then(response=>{
-      if(!response.data.error)
-        console.log(response.data.data);
-    })
-    .catch(error=>{
-      console.log(error);
-    })
-  },[]);
+      .then((response) => {
+        if (!response.data.error) {
+          setUserData(response.data.data);
+          console.log(userdata.name);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // fetchQA()
+  }, []);
 
   const showQuestionPopUp = () => {
     setShowQuestionModal(true);
   };
 
-  
   return (
     <>
       {showQuestionModal && <Modal localstate={setShowQuestionModal} />}
@@ -36,7 +50,7 @@ const FAQ = () => {
         <div className="grid">
           <div className="grid1">
             <Tilt tiltMaxAngleX={12.5} tiltMaxAngleY={12.5}>
-              <ProfileCard />
+              <ProfileCard localstate={userdata.name} />
             </Tilt>
           </div>
           <div className="grid2">

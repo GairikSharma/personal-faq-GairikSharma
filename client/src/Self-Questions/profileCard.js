@@ -4,7 +4,8 @@ import img from './unnamed.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 
-const ProfileCard = () => {
+const ProfileCard = (props) => {
+    
     return (
         <div className="profile-card">
             <div className="img">
@@ -15,7 +16,7 @@ const ProfileCard = () => {
             </div>
             <div className="txt">
                 <h2>FAQ</h2>
-                <h3>Sayan Ghosh</h3>
+                <h3> {props.localstate} </h3>
                 <h4>Full Stack developer</h4>
             </div>
             <div className="profile-icons">
