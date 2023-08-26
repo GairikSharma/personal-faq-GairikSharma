@@ -14,33 +14,23 @@ const FAQ = () => {
   const [userdata, setUser] = useState({});
 
   const [showQuestionModal, setShowQuestionModal] = useState(false);
-  const qsarr = [];
-  {
-    qsarr.push(userdata);
-  }
-  const qs = [];
-  {
-    qsarr.map((i) => {
-      qs.push(qsarr.QA);
-    });
-  }
+  // const qsarr = [];
+  // {
+  //   qsarr.push(userdata);
+  // }
+  // const qs = [];
+  // {
+  //   qsarr.map((i) => {
+  //     qs.push(qsarr.QA);
+  //   });
+  // }
   // qsarr.push(userdata)
   // console.log(qsarr);
   useEffect(() => {
     axios(`${process.env.REACT_APP_BASE_URL}read/livetocode`)
       .then((response) => {
         if (!response.data.error) {
-          // console.log(response.data.data);
-          setUser({
-            key1: "value1",
-            key2: "value2",
-            key3: "value3",
-          });
-          console.log(userdata);
-          // setUserquestion(response.data.data.QA)
-          // console.log(userquestion);
-          // setUserData(response.data.data);
-          // console.log(userdata.name);
+          setUser(response.data.data);
         }
       })
       .catch((error) => {
@@ -54,23 +44,21 @@ const FAQ = () => {
   return (
     <>
       {showQuestionModal && <Modal localstate={setShowQuestionModal} />}
-      <div className="main">
-        <div className="grid">
-          <div className="grid1">
-            <Tilt tiltMaxAngleX={12.5} tiltMaxAngleY={12.5}>
-              <ProfileCard localstate={userdata.name} />
-            </Tilt>
+      {!Object.keys(userdata).length && userdata.QA && userdata.QA.length !== 0 ? null :
+        <div className="main">
+          <div className="grid">
+            <div className="grid1">
+              <Tilt tiltMaxAngleX={12.5} tiltMaxAngleY={12.5}>
+                <ProfileCard localstate={userdata.name} />
+              </Tilt>
+            </div>
+            <div className="grid2">
+              <SingleQuestion localdata={userdata} />
+            </div>
           </div>
-          <div className="grid2">
-            {qsarr.map((que) => {
-              return (
-                <SingleQuestion key={que.id} questionlocalState={userdata} />
-              );
-            })}
-          </div>
+          <BsFillChatDotsFill className="chat-icon" onClick={showQuestionPopUp} />
         </div>
-        <BsFillChatDotsFill className="chat-icon" onClick={showQuestionPopUp} />
-      </div>
+      }
     </>
   );
 };
