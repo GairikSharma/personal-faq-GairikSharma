@@ -11,38 +11,46 @@ import Modal from "../components/modal/Modal";
 import { BsFillChatDotsFill } from "react-icons/bs";
 
 const FAQ = () => {
-  const [userdata, setUserData] = useState([{}]);
+  const [userdata, setUser] = useState({});
+
   const [showQuestionModal, setShowQuestionModal] = useState(false);
-  // const fetchQA = async () => {
-  //   try {
-  //     const data = await fetch(
-  //       `${process.env.REACT_APP_BASE_URL}read/livetocode`
-  //     );
-  //     const res = await data.json();
-  //     setUserData(res.data);
-  //     console.log(userdata);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const qsarr = [];
+  {
+    qsarr.push(userdata);
+  }
+  const qs = [];
+  {
+    qsarr.map((i) => {
+      qs.push(qsarr.QA);
+    });
+  }
+  // qsarr.push(userdata)
+  // console.log(qsarr);
   useEffect(() => {
     axios(`${process.env.REACT_APP_BASE_URL}read/livetocode`)
       .then((response) => {
         if (!response.data.error) {
-          setUserData(response.data.data);
-          console.log(userdata.name);
+          // console.log(response.data.data);
+          setUser({
+            key1: "value1",
+            key2: "value2",
+            key3: "value3",
+          });
+          console.log(userdata);
+          // setUserquestion(response.data.data.QA)
+          // console.log(userquestion);
+          // setUserData(response.data.data);
+          // console.log(userdata.name);
         }
       })
       .catch((error) => {
         console.log(error);
       });
-    // fetchQA()
   }, []);
 
   const showQuestionPopUp = () => {
     setShowQuestionModal(true);
   };
-
   return (
     <>
       {showQuestionModal && <Modal localstate={setShowQuestionModal} />}
@@ -54,8 +62,10 @@ const FAQ = () => {
             </Tilt>
           </div>
           <div className="grid2">
-            {questions.map((que) => {
-              return <SingleQuestion key={que.id} {...que} />;
+            {qsarr.map((que) => {
+              return (
+                <SingleQuestion key={que.id} questionlocalState={userdata} />
+              );
             })}
           </div>
         </div>
